@@ -9,7 +9,7 @@
 	"author": {
 		"name": "vineetverma",
 		"email": "vineet@blogohblog.com",
-		"url": "www.blogohblog.com"
+		"url": "https://blogohblog.com"
 	},
 	"keywords": [
 		"wpstats",
@@ -23,6 +23,7 @@
 		"format": "prettier --write \"./**/*.{js,json}\""
 	},
 	"dependencies": {
+		"await-to-js": "^3.0.0",
 		"axios": "^0.21.1",
 		"chalk": "^4.1.1",
 		"cli-alerts": "^1.2.2",

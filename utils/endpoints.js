@@ -1,12 +1,12 @@
 const createUrlQuery = require('create-url-query');
 
 const base = {
-	themes: 'api.wordpress.org/themes/info/1.1/',
+	themes: 'https://api.wordpress.org/themes/info/1.1/',
 	plugins: 'https://api.wordpress.org/plugins/info/1.2/',
 	events: 'https://api.wordpress.org/events/1.0'
 };
 
-const themesUrl = (action = 'query_themes', request = null) => {
+const endpoint = (action = 'query_themes', request = null) => {
 	params = {
 		action, // query_themes, theme_information, hot_tags (for popular themes), feature_list (returns a list of valid theme tags)
 		request: {
@@ -17,7 +17,10 @@ const themesUrl = (action = 'query_themes', request = null) => {
 			page: '',
 			per_page: '',
 			browse: 'new', // popular, featured, updated, new
-			fields: [], // array of theme information to be returned
+			'request[fields]': {
+				downloaded: 1,
+				active_installs: 1
+			}, // array of theme information to be returned
 			...request
 		}
 	};
@@ -30,4 +33,4 @@ const plugins = $args => {};
 
 const events = $args => {};
 
-module.exports = { themesUrl };
+module.exports = { endpoint };

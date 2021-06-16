@@ -27,7 +27,8 @@ const flags = {
 };
 
 const commands = {
-	help: { desc: `Print help info` }
+	help: { desc: `Print help info` },
+	themes: { desc: `To query WordPress.org themes` }
 };
 
 const helpText = meowHelp({
