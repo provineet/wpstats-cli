@@ -29,7 +29,7 @@ const fetchStats = async () => {
 			fetchIt(endpoint('query_themes', request))
 		);
 
-		handleError(`Failed while building on step #1`, err);
+		handleError(`Error fetching the resource`, err);
 		return response;
 	}
 };
