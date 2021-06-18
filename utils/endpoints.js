@@ -1,9 +1,10 @@
 const createUrlQuery = require('create-url-query');
+const { input, flags } = require('./cli');
 
 const base = {
 	themes: 'https://api.wordpress.org/themes/info/1.1/',
 	plugins: 'https://api.wordpress.org/plugins/info/1.2/',
-	events: 'https://api.wordpress.org/events/1.0'
+	events: 'https://api.wordpress.org/events/1.0/'
 };
 
 const endpoint = (action = 'query_themes', request = null) => {
@@ -20,12 +21,15 @@ const endpoint = (action = 'query_themes', request = null) => {
 			'request[fields]': {
 				downloaded: 1,
 				active_installs: 1,
-                description: 0
+				description: 0
 			}, // array of theme information to be returned
 			...request
 		}
 	};
+
+	// console.log(`${base.events}/location=${flags.l}`);
 	return `${base.themes}/${createUrlQuery(params)}`;
+	// return input.includes(`events`) && `${base.events}?location=${flags.l}`;
 };
 
 // const themesUrl = $args => {};
