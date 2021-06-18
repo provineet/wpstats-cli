@@ -10,8 +10,8 @@
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
-
-const { fetchStats } = require('./utils/fetch');
+const wpstats = require('./utils/wpstats');
+const {socials} = require("./utils/data");
 
 const input = cli.input;
 const flags = cli.flags;
@@ -22,9 +22,9 @@ const { clear, debug } = flags;
 
 	input.includes(`help`) && cli.showHelp(0);
 
-	response = await fetchStats();
+    flags.socials && console.log( socials );
 
-	console.log(response.data);
+	wpstats();
 
 	debug && log(flags);
 })();

@@ -15,7 +15,7 @@ const endpoint = (action = 'query_themes', request = null) => {
 			theme: '', // slug of a specific theme
 			author: '',
 			page: '',
-			per_page: '',
+			per_page: 20,
 			browse: 'new', // popular, featured, updated, new
 			'request[fields]': {
 				downloaded: 1,
