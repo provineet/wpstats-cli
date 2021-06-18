@@ -6,6 +6,7 @@ const { default: axios } = require('axios');
 const ora = require('ora');
 const {themes} = require('./data');
 const {bold} = require('chalk');
+const { printTable } = require('console-table-printer');
 
 const {blue: b, green: g} = require('chalk');
 
@@ -40,7 +41,8 @@ if (input.includes(`themes`)) {
         const [err, response] = await to( axios(endpoint('query_themes', request)) );
         handleError(`Error fetching the resource`, err);
 
-        showThemes(response.data);
+        // showThemes(response.data);
+        printTable(response.data.info);
 
         console.log(`\n\n`);
         spinner.succeed(`${g(themes.success(response.data.info.results))}`);

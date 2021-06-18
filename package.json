@@ -31,6 +31,7 @@
 		"cli-handle-unhandled": "^1.1.1",
 		"cli-meow-help": "^2.0.2",
 		"cli-welcome": "^2.2.2",
+		"console-table-printer": "^2.9.0",
 		"create-url-query": "^0.1.0",
 		"meow": "^9.0.0",
 		"ora": "^5.4.1"

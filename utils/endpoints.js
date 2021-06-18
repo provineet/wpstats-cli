@@ -19,7 +19,8 @@ const endpoint = (action = 'query_themes', request = null) => {
 			browse: 'new', // popular, featured, updated, new
 			'request[fields]': {
 				downloaded: 1,
-				active_installs: 1
+				active_installs: 1,
+                description: 0
 			}, // array of theme information to be returned
 			...request
 		}
