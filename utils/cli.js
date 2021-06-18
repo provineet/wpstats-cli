@@ -23,6 +23,36 @@ const flags = {
 		type: `boolean`,
 		alias: `v`,
 		desc: `Print CLI version`
+	},
+	name: {
+		type: `string`,
+		alias: `n`,
+		desc: `Theme slug to get info about`
+	},
+	search: {
+		type: `string`,
+		alias: `s`,
+		desc: `Search string to filter through the themes`
+	},
+	author: {
+		type: `string`,
+		alias: `a`,
+		desc: `Get all themes from this author`
+	},
+	browse: {
+		type: `string`,
+		alias: `b`,
+		desc: `Browser themes options: new | updated | featured |popular `
+	},
+	tag: {
+		type: `string`,
+		alias: `t`,
+		desc: `Browser themes for a given tag or category.`
+	},
+	total: {
+		type: `string`,
+		alias: `tn`,
+		desc: `Total number of themes to query`
 	}
 };
 

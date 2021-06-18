@@ -5,10 +5,9 @@ const handleError = require('cli-handle-error');
 const { default: axios } = require('axios');
 const ora = require('ora');
 const {themes} = require('./data');
-const {bold} = require('chalk');
-const { printTable } = require('console-table-printer');
+const boxen = require('boxen');
 
-const {blue: b, green: g} = require('chalk');
+const {blue: b, green: g, bold, bgBlue, white} = require('chalk');
 
 const spinner = ora(``);
 
@@ -21,47 +20,49 @@ if (input.includes(`themes`)) {
 
         let startMsg = ``;
 
-        if( flags.n ){
-            startMsg = `Fetching Theme: ${bold(`${flags.n}...`)}`;
+        console.log(flags);
+
+        if( flags.name ){
+            startMsg = `Fetching Theme: ${bold(`${flags.name}...`)}`;
         }else{
-            const total = flags.t || 20;
+            const total = flags.total || 20;
             startMsg = flags.hot ? `${total} Popular Themes...` : `${total} Latest Themes...`;
         }
 
-
         spinner.start(`${b(themes.start(startMsg))}\n\n`);
 
-		flags.n && (request.theme = flags.n);
-		flags.s && (request.search = flags.s);
-		flags.a && (request.author = flags.a);
-		flags.b && (request.browse = flags.b);
-        flags.h && (request.tag = flags.h);
-        flags.t && (request.per_page = flags.t);
+		flags.name && (request.theme = flags.n);
+		flags.search && (request.search = flags.s);
+		flags.author && (request.author = flags.author);
+		flags.browse && (request.browse = flags.browse);
+        flags.tag && (request.tag = flags.tag);
+        flags.total && (request.per_page = flags.total);
 
         const [err, response] = await to( axios(endpoint('query_themes', request)) );
         handleError(`Error fetching the resource`, err);
 
-        // showThemes(response.data);
-        printTable(response.data.info);
+        showThemes(response.data);
+        // console.log(response.data);
 
         console.log(`\n\n`);
         spinner.succeed(`${g(themes.success(response.data.info.results))}`);
 
-		return response;
+		// return response;
 	}
 
 }
 
 const showThemes = data => {
-    console.log(data)
     data.themes.forEach((theme, index) => {
-        console.log(`Theme Name: ${theme.name}\n`);
-        console.log(`Version: ${theme.version}\n`);
-        console.log(`Downloaded: ${theme.downloaded}\n`);
-        console.log(`Active Installs: ${theme.active_installs}\n`);
-        console.log(`Author: ${theme.author}\n`);
-        console.log(`Homepage: ${theme.homepage}\n`);
-        console.log(`Preview: ${theme.preview_url}\n`);
+        let out = `${bgBlue( white( ` #${index+1} ` ) )}\n\n
+${g(`Theme Name: ${theme.name}`)}
+Version: ${theme.version}
+Downloaded: ${theme.downloaded}
+Active Installs: ${theme.active_installs}
+Author: ${theme.author}
+Homepage: ${theme.homepage}
+Preview: ${theme.preview_url}`
+        console.log(boxen(out, {padding: 1, borderStyle: 'double'}));
     });
 }
 
